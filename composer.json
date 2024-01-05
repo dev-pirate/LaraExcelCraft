@@ -1,7 +1,6 @@
 {
     "name": "dev-pirate/lara-excel-craft",
     "description": "Laravel package to export / import excel sheets",
-    "type": "project",
     "license": "MIT",
     "autoload": {
         "psr-4": {
