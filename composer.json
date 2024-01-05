@@ -33,7 +33,7 @@
     "extra": {
         "laravel": {
             "aliases": {
-                "LaraExcelCraft": "DevPirate\\LaraExcelCraft\\Facades\\LaraExcelCraft"
+                "LaraExcelCraft": "DevPirate\\LaraExcelCraft\\LaraExcelCraft"
             },
             "providers": [
                 "DevPirate\\LaraExcelCraft\\Providers\\LaraExcelCraftProvider"
