@@ -1,0 +1,37 @@
+{
+    "name": "lara_excel_craft",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "yarn run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "yarn run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "@babel/preset-react": "^7.0.0",
+        "@pmmmwh/react-refresh-webpack-plugin": "^0.5.0-rc.0",
+        "eslint": "^7.20.0",
+        "laravel-mix": "^6.0.6",
+        "postcss": "^8.1.14",
+        "react-refresh": "^0.14.0",
+        "resolve-url-loader": "^3.1.2"
+    },
+    "dependencies": {
+        "@ant-design/icons": "^5.2.6",
+        "@testing-library/jest-dom": "^5.17.0",
+        "@testing-library/react": "^13.4.0",
+        "@testing-library/user-event": "^13.5.0",
+        "antd": "^5.12.7",
+        "axios": "^1.6.4",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-scripts": "5.0.1",
+        "sass": "^1.69.7",
+        "sass-loader": "^11.0.0",
+        "web-vitals": "^2.1.4"
+    }
+}

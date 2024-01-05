@@ -1,0 +1,29 @@
+{
+    "name": "dev-pirate/lara-excel-craft",
+    "description": "Laravel package to export / import excel sheets",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "DevPirate\\LaraExcelCraft\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Meherbs",
+            "email": "meherbensalah4@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true
+    },
+    "require": {
+        "php": "^8.1",
+        "barryvdh/laravel-cors": "*",
+        "phpoffice/phpspreadsheet": "^1.29"
+    }
+}
