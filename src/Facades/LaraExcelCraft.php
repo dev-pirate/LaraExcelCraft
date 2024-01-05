@@ -8,6 +8,6 @@ final class LaraExcelCraft extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return 'lara_excel_craft';
+        return LaraExcelCraft::class;
     }
 }
