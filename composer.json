@@ -23,6 +23,21 @@
     "require": {
         "php": "^8.1",
         "barryvdh/laravel-cors": "*",
-        "phpoffice/phpspreadsheet": "^1.29"
-    }
+        "phpoffice/phpspreadsheet": "^1.29",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.7",
+        "mockery/mockery": "^1.2"
+    },
+    "extra": {
+        "laravel": {
+            "aliases": {
+                "LaraExcelCraft": "DevPirate\\LaraExcelCraft\\Facades\\LaraExcelCraft"
+            },
+            "providers": [
+                "DevPirate\\LaraExcelCraft\\Providers\\LaraExcelCraftProvider"
+            ]
+        }
+    },
 }
