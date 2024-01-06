@@ -4,6 +4,7 @@ namespace DevPirate\LaraExcelCraft\Providers;
 use DevPirate\LaraExcelCraft\Console\Commands\RemoveExpiredFilesCommand;
 use DevPirate\LaraExcelCraft\Console\Kernel;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 
 class LaraExcelCraftProvider extends ServiceProvider
@@ -20,8 +21,15 @@ class LaraExcelCraftProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'lara_excel_craft');
         Blade::componentNamespace('DevPirate\\LaraExcelCraft\\View\\Components', 'lara-excel-craft');
 
+        $folderPath = public_path('vendor/lara-excel-craft');
+
+        if (file_exists($folderPath)) {
+            // Delete the folder and its contents
+            File::deleteDirectory($folderPath);
+        }
+
         $this->publishes([
-            __DIR__ . '/../../public' => public_path('vendor/lara-excel-craft'),
+            __DIR__ . '/../../public' => $folderPath,
         ], 'lara-excel-craft-assets');
 
         $this->publishes([
