@@ -23,11 +23,6 @@ class LaraExcelCraftProvider extends ServiceProvider
 
         $folderPath = public_path('vendor/lara-excel-craft');
 
-        if (file_exists($folderPath)) {
-            // Delete the folder and its contents
-            File::deleteDirectory($folderPath);
-        }
-
         $this->publishes([
             __DIR__ . '/../../public' => $folderPath,
         ], 'lara-excel-craft-assets');
