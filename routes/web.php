@@ -8,10 +8,10 @@ use DevPirate\LaraExcelCraft\Controllers\ImportController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'lara-excel-craft'], function () {
-    Route::post('file-import', FileUploadController::class);
-    Route::get('table-map', TableFetchController::class);
-    Route::get('{fileName}/file-columns', FileColumnsController::class);
-    Route::get('{fileName}/file-data', FileDataController::class);
-    Route::post('excel-data-import', ImportController::class);
+    Route::post('file-import', FileUploadController::class)->name('lara_excel_craft.file_import');
+    Route::get('table-map', TableFetchController::class)->name('lara_excel_craft.table_fetch');
+    Route::get('{fileName}/file-columns', FileColumnsController::class)->name('lara_excel_craft.file_columns');
+    Route::get('{fileName}/file-data', FileDataController::class)->name('lara_excel_craft.file_data');
+    Route::post('excel-data-import', ImportController::class)->name('lara_excel_craft.excel_confirm_import');
 });
 
