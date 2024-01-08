@@ -35,7 +35,7 @@ class LaraExcelCraftProvider extends ServiceProvider
             $asset = asset('vendor/lara-excel-craft/js/index.js');
             $scriptLink = "<script src='$asset' defer></script>";
             $str =  json_encode($scriptLink);
-            return "<?php echo 'test'; ?>";
+            return "<?php echo $str; ?>";
         });
     }
 
