@@ -31,10 +31,9 @@ class LaraExcelCraftProvider extends ServiceProvider
             __DIR__.'/../../config/lara-excel-craft.php' => config_path('lara-excel-craft.php'),
         ], 'config');
 
-        Blade::directive('laraExcelCraftScripts', function () {
+        Blade::directive('laraExcelCraftScripts', function ($expression) {
             $asset = asset('vendor/lara-excel-craft/js/index.js');
-            $scriptLink = "<script src='$asset' defer></script>";
-            return `<?php echo "$scriptLink"; ?>`;
+            return "<?php echo \"<script src='$asset' defer></script>\"; ?>";
         });
     }
 
