@@ -33,7 +33,9 @@ class LaraExcelCraftProvider extends ServiceProvider
 
         Blade::directive('laraExcelCraftScripts', function ($expression) {
             $asset = asset('vendor/lara-excel-craft/js/index.js');
-            return "<?php echo \"<script src='$asset' defer></script>\"; ?>";
+            $scriptLink = "<script src='$asset' defer></script>";
+            $str =  json_encode($scriptLink);
+            return "<?php echo 'test'; ?>";
         });
     }
 
