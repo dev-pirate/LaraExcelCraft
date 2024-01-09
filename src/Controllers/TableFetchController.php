@@ -3,44 +3,30 @@
 namespace DevPirate\LaraExcelCraft\Controllers;
 
 use App\Models\Tenant;
+use DevPirate\LaraExcelCraft\Interfaces\ImportableInterface;
+use DevPirate\LaraExcelCraft\Services\TableNamesFinder;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Builder;
 
 class TableFetchController
 {
-    public function __invoke() {
-        $tables = $this->getTables();
+    public function __invoke(TableNamesFinder $finder) {
+        $tables = $finder->findTables();
 
         $tablesInfo = [];
 
         foreach ($tables as $table) {
-            $fields = Schema::getColumnListing($table);
+            $modelClass = $table['class_name'];
+            $tableName = $table['table_name'];
+            if (class_exists($modelClass) && in_array(ImportableInterface::class, class_implements($modelClass))) {
+                $fields = $modelClass::getImportableFields();
+            } else {
+                $fields = Schema::getColumnListing($tableName);
+            }
 
-            $tablesInfo[$table] = $fields;
+            $tablesInfo[$tableName] = $fields;
         }
 
         return response()->json(['tablesInfo' => $tablesInfo, 'success' => true]);
-    }
-
-    public function getTables()
-    {
-        $schemaManager = $this->getSchemaManager();
-        $databaseName = $this->getDatabaseName();
-
-        return $schemaManager->listTableNames($databaseName);
-    }
-
-    protected function getSchemaManager()
-    {
-        return app(Builder::class)->getConnection()->getDoctrineSchemaManager();
-    }
-
-    protected function getDatabaseName()
-    {
-        if (function_exists('tenant_db_finder')) {
-            $dbname = tenant_db_finder();
-            if ($dbname) return $dbname;
-        }
-        return config('database.connections.mysql.database');
     }
 }
