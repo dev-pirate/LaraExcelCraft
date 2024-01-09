@@ -1,7 +1,13 @@
 # LaraExcelCraft
 
-Foobar is a Python library for dealing with word pluralization.
+LaraExcelCraft is a Laravel package for importing/exporting Excel file into database tables easily step by step with nice UI, 
+using [antd components](https://github.com/ant-design/ant-design), [ReactJs](https://github.com/facebook/react) and
+[phpoffice/phpspreadsheet](https://github.com/PHPOffice/PhpSpreadsheet).
 
+![Import Excel file View](https://github.com/dev-pirate/LaraExcelCraft/tree/main/public/images/import_view.png)
+
+
+![Export to Excel file View](https://github.com/dev-pirate/LaraExcelCraft/tree/main/public/images/export_view.png)
 ## Install via composer
 
 Run the following command to pull in the latest version:
@@ -35,11 +41,24 @@ Route::middleware([
 // \Fruitcake\Cors\HandleCors middleware are required here to manage cors
 ```
 
+## Add View
+
+- Add the import component to your view :
+```html
+<x-lara-excel-craft::lara-excel-import-sheet />
+```
+- Add the export component to your view :
+```html
+<x-lara-excel-craft::lara-excel-export-sheet />
+```
+
 ## Custom Excel Import
 Before continuing, make sure you have installed the package as per the installation instructions for Laravel.
 
 ### Update your User model
-Firstly you need to implement the DevPirate\LaraExcelCraft\Interfaces\ImportableInterface interface on your model, which require a custom data importing logic, you implement the 2 methods importDataFromExcel(array $data) and getImportableFields().
+Firstly you need to implement the DevPirate\LaraExcelCraft\Interfaces\ImportableInterface interface on your model, 
+which require a custom data importing logic, you implement the 3 methods importDataFromExcel(array $data) 
+and getImportableFields() and exportDataFromExcel().
 
 The example below should give you an idea of how this could look. Obviously you should make any changes, as necessary, to suit your own needs.
 
@@ -68,14 +87,16 @@ class Example extends Model implements ImportableInterface
         'updated_at',
     ];
 
-    public static function importDataFromExcel(array $data)
+    public static function importDataFromExcel(array $data): void
     {
+        // this can be customized, it depends on your logic
+        // this is just an example
         $data = array_map(function ($item) {
             return [
                 ...$item,
                 'total' => floatval($item['total'] ?? 0),
                 'unit' => intval($item['unit'] ?? 0),
-                'orderDate' => $item['orderDate'] ? Carbon::createFromFormat('m/d/y', trim($item['orderDate'])): null,
+                'orderDate' => $item['orderDate'] ? Carbon::createFromFormat('d/m/Y', trim($item['orderDate'])): null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
@@ -83,8 +104,9 @@ class Example extends Model implements ImportableInterface
         self::insert($data);
     }
 
-    public static function getImportableFields()
+    public static function getImportableFields(): array
     {
+        // return an array of the table fields that could be importable from excel
         return [
             'orderDate',
             'region',
@@ -94,8 +116,17 @@ class Example extends Model implements ImportableInterface
             'total'
         ];
     }
-}
 
+    public static function exportDataFromExcel(): array
+    {
+        // this can be customized depend on your logic
+        return array_map(function ($item) {
+            return array_merge($item, [
+                'orderDate' => Carbon::parse($item['orderDate'])->format('d/m/Y') ?? ''
+            ]);
+        }, self::all()->toArray());
+    }
+}
 ```
 
 ## Config File

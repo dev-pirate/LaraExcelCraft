@@ -6,15 +6,7 @@ use Illuminate\View\Component;
 
 class LaraExcelImportSheet extends Component
 {
-    public $redirectTo = "";
-
-    /**
-     * @param $redirectTo
-     */
-    public function __construct($redirectTo)
-    {
-        $this->redirectTo = $redirectTo;
-    }
+    public function __construct() {}
 
     /**
      * Get the view / contents that represent the component.
