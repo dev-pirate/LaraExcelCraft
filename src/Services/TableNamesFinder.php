@@ -2,6 +2,7 @@
 
 namespace DevPirate\LaraExcelCraft\Services;
 
+use DevPirate\LaraExcelCraft\Interfaces\ExcelManager;
 use Illuminate\Support\Str;
 use Illuminate\Filesystem\Filesystem;
 
@@ -31,11 +32,13 @@ class TableNamesFinder
                     // Convert class name to table name using Laravel's naming conventions
                     $tableName = Str::snake(Str::plural($className));
                 }
-
-                $modelInfo[] = [
-                    'class_name' => $namespace . '\\' . $className,
-                    'table_name' => $tableName,
-                ];
+                $classNamespace = $namespace . '\\' . $className;
+                if (class_exists($classNamespace) && in_array(ExcelManager::class, class_implements($classNamespace))) {
+                    $modelInfo[] = [
+                        'class_name' => $classNamespace,
+                        'table_name' => $tableName,
+                    ];
+                }
             }
         }
 

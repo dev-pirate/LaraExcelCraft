@@ -4,7 +4,7 @@ namespace DevPirate\LaraExcelCraft\Controllers;
 
 use App\Models\Tenant\Example;
 use App\Models\Tenant\Guest;
-use DevPirate\LaraExcelCraft\Interfaces\ImportableInterface;
+use DevPirate\LaraExcelCraft\Interfaces\ExcelManager;
 use DevPirate\LaraExcelCraft\LaraExcelCraft;
 use DevPirate\LaraExcelCraft\Services\FileDataReader;
 use DevPirate\LaraExcelCraft\Services\TableNamesFinder;
@@ -42,7 +42,7 @@ class ImportController
         }
 
         // Check if the class exists and if it uses the ImportableTrait
-        if (class_exists($modelClass) && in_array(ImportableInterface::class, class_implements($modelClass))) {
+        if (class_exists($modelClass) && in_array(ExcelManager::class, class_implements($modelClass))) {
             // Call the importData function in the dynamically determined class
             $modelClass::importDataFromExcel($data);
 

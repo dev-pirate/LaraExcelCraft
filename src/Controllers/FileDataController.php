@@ -2,7 +2,7 @@
 
 namespace DevPirate\LaraExcelCraft\Controllers;
 
-use DevPirate\LaraExcelCraft\Interfaces\ImportableInterface;
+use DevPirate\LaraExcelCraft\Interfaces\ExcelManager;
 use DevPirate\LaraExcelCraft\Services\FileDataReader;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;

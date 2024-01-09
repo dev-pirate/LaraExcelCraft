@@ -2,7 +2,7 @@
 
 namespace DevPirate\LaraExcelCraft\Interfaces;
 
-interface ImportableInterface
+interface ExcelManager
 {
     /**
      * @param array $data
@@ -24,5 +24,5 @@ interface ImportableInterface
      * make sure that you add your logic here
      * make sure to use the table field names as keys for the array
      */
-    public static function exportDataFromExcel(): array;
+    public static function exportDataToExcel(): array;
 }

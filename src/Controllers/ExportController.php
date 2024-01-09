@@ -2,7 +2,7 @@
 
 namespace DevPirate\LaraExcelCraft\Controllers;
 
-use DevPirate\LaraExcelCraft\Interfaces\ImportableInterface;
+use DevPirate\LaraExcelCraft\Interfaces\ExcelManager;
 use DevPirate\LaraExcelCraft\LaraExcelCraft;
 use DevPirate\LaraExcelCraft\Services\FileDataReader;
 use DevPirate\LaraExcelCraft\Services\TableNamesFinder;
@@ -34,9 +34,9 @@ class ExportController
 
     public function exportCsv($table, $className, $columns)
     {
-        if (class_exists($className) && in_array(ImportableInterface::class, class_implements($className))) {
+        if (class_exists($className) && in_array(ExcelManager::class, class_implements($className))) {
             // Call the importData function in the dynamically determined class
-            $data = $className::exportDataFromExcel();
+            $data = $className::exportDataToExcel();
         } else {
             $data = $className::all();
         }

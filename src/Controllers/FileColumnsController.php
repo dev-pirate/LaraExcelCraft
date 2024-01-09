@@ -2,7 +2,7 @@
 
 namespace DevPirate\LaraExcelCraft\Controllers;
 
-use DevPirate\LaraExcelCraft\Interfaces\ImportableInterface;
+use DevPirate\LaraExcelCraft\Interfaces\ExcelManager;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -76,7 +76,7 @@ class FileColumnsController
         $modelClass = 'App\\Models\\' . ucfirst(Str::camel($tableName));
 
         // Check if the class exists and if it uses the ImportableTrait
-        if (class_exists($modelClass) && in_array(ImportableInterface::class, class_implements($modelClass))) {
+        if (class_exists($modelClass) && in_array(ExcelManager::class, class_implements($modelClass))) {
             // Call the importData function in the dynamically determined class
             $modelClass::importData($data);
 

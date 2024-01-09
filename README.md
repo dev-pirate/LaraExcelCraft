@@ -56,9 +56,9 @@ Route::middleware([
 Before continuing, make sure you have installed the package as per the installation instructions for Laravel.
 
 ### Update your User model
-Firstly you need to implement the DevPirate\LaraExcelCraft\Interfaces\ImportableInterface interface on your model, 
+Firstly you need to implement the DevPirate\LaraExcelCraft\Interfaces\ExcelManager interface on your model, 
 which require a custom data importing logic, you implement the 3 methods importDataFromExcel(array $data) 
-and getImportableFields() and exportDataFromExcel().
+and getImportableFields() and exportDataToExcel().
 
 The example below should give you an idea of how this could look. Obviously you should make any changes, as necessary, to suit your own needs.
 
@@ -68,11 +68,11 @@ The example below should give you an idea of how this could look. Obviously you 
 namespace App\Models;
 
 use Carbon\Carbon;
-use DevPirate\LaraExcelCraft\Interfaces\ImportableInterface;
+use DevPirate\LaraExcelCraft\Interfaces\ExcelManager;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Example extends Model implements ImportableInterface
+class Example extends Model implements ExcelManager
 {
     use HasFactory;
 
