@@ -7,7 +7,7 @@ using [antd components](https://github.com/ant-design/ant-design), [ReactJs](htt
 ![Import Excel file View](https://raw.githubusercontent.com/dev-pirate/LaraExcelCraft/main/public/images/import_view.png)
 
 
-![Export to Excel file View](https://raw.githubusercontent.com/dev-pirate/LaraExcelCraft/main/public/images/export_view.png)
+![Export to Excel file View](https://raw.githubusercontent.com/dev-pirate/LaraExcelCraft/main/public/images/export.png)
 ## Install via composer
 
 Run the following command to pull in the latest version:
