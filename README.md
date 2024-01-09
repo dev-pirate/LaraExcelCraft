@@ -4,7 +4,7 @@ LaraExcelCraft is a Laravel package for importing/exporting Excel file into data
 using [antd components](https://github.com/ant-design/ant-design), [ReactJs](https://github.com/facebook/react) and
 [phpoffice/phpspreadsheet](https://github.com/PHPOffice/PhpSpreadsheet).
 
-![Import Excel file View](https://raw.githubusercontent.com/dev-pirate/LaraExcelCraft/tree/main/public/images/import_view.png)
+![Import Excel file View](https://raw.githubusercontent.com/dev-pirate/LaraExcelCraft/main/public/images/import_view.png)
 
 
 ![Export to Excel file View](https://raw.githubusercontent.com/dev-pirate/LaraExcelCraft/main/public/images/export_view.png)
