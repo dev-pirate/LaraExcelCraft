@@ -17,7 +17,6 @@ class LaraExcelCraftProvider extends ServiceProvider
             ]);
         }
 
-        //$this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'lara_excel_craft');
         Blade::componentNamespace('DevPirate\\LaraExcelCraft\\View\\Components', 'lara-excel-craft');
 
@@ -32,10 +31,10 @@ class LaraExcelCraftProvider extends ServiceProvider
         ], 'config');
 
         Blade::directive('laraExcelCraftScripts', function ($expression) {
-            $asset = asset('vendor/lara-excel-craft/js/index.js');
+            $asset = asset('vendor/lara-excel-craft/js/index.jsx');
             $scriptLink = "<script src='$asset' defer></script>";
-            //$str =  json_encode($scriptLink);
-            return "<?php echo $scriptLink; ?>";
+            $str =  json_encode($scriptLink);
+            return "<?php echo $str; ?>";
         });
     }
 

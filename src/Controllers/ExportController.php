@@ -26,26 +26,20 @@ class ExportController
         });
         $filtered = empty($filtered) ? null : reset($filtered);
 
-        $this->exportCsv($filtered['table_name'], $filtered['class_name'], $columns);
-
-        return response()->json(['success' => true, 'redirectTo' => route(config('lara-excel-craft.redirectTo'))]);
+        return $this->exportCsv($filtered['table_name'], $filtered['class_name'], $columns);
 
         // Check if the class exists and if it uses the ImportableTrait
-        /*if (class_exists($modelClass) && in_array(ImportableInterface::class, class_implements($modelClass))) {
-            // Call the importData function in the dynamically determined class
-            $modelClass::importDataFromExcel($data);
 
-            return response()->json(['message' => 'Data imported successfully', "success" => true, 'redirectTo' => route(config('lara-excel-craft.redirectTo'))]);
-        } else {
-            $modelClass::insert($data);
-
-            return response()->json(['message' => 'Data imported successfully', "success" => true, 'redirectTo' => route(config('lara-excel-craft.redirectTo'))]);
-        }*/
     }
 
     public function exportCsv($table, $className, $columns)
     {
-        $data = $className::all(); // Replace with your query to fetch data
+        if (class_exists($className) && in_array(ImportableInterface::class, class_implements($className))) {
+            // Call the importData function in the dynamically determined class
+            $data = $className::exportDataFromExcel();
+        } else {
+            $data = $className::all();
+        }
 
         $csvFileName = $table. '.csv';
 
@@ -54,19 +48,20 @@ class ExportController
             "Content-Disposition" => "attachment; filename=$csvFileName",
             "Pragma"              => "no-cache",
             "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
-            "Expires"             => "0"
+            "Expires"             => "0",
+            "redirectTo"          => route(config('lara-excel-craft.redirectTo')),
         );
 
         $handle = fopen('php://output', 'w');
 
         // Add CSV headers
-        fputcsv($handle, array_keys($data[0]->toArray()));
+        fputcsv($handle, $columns);
 
         // Add data rows
         foreach ($data as $row) {
             $array = [];
             foreach ($columns as $exportableColumn) {
-                $array[$exportableColumn] = $row->$exportableColumn;
+                $array[$exportableColumn] = $row[$exportableColumn];
             }
             fputcsv($handle, $array);
         }
