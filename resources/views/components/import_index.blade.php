@@ -1,3 +1,4 @@
+@include('lara_excel_craft::scripts')
 <script>
     const laraExcelCraftFileImportRoute = "{{ route('lara_excel_craft.file_import') }}";
     const laraExcelCraftTableFetchRoute = "{{ route('lara_excel_craft.table_fetch') }}";

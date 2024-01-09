@@ -29,13 +29,6 @@ class LaraExcelCraftProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../../config/lara-excel-craft.php' => config_path('lara-excel-craft.php'),
         ], 'config');
-
-        Blade::directive('laraExcelCraftScript', function ($expression) {
-            $asset = asset('vendor/lara-excel-craft/js/index.jsx');
-            $scriptLink = "<script src='$asset' defer></script>";
-            $str =  json_encode($scriptLink);
-            return "<?php echo $str; ?>";
-        });
     }
 
     public function register()
